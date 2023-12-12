@@ -2,8 +2,8 @@ package com.ravinada.sps.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ravinada.sps.domain.local.FavoriteMoviesEntity
-import com.ravinada.sps.usecases.GetFavoriteMoviesUseCase
+import com.ravinada.sps.domain.local.FavoriteTvShowsEntity
+import com.ravinada.sps.usecases.GetFavoriteTvShowsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,10 +16,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
-    private val getFavoriteMoviesUseCase: GetFavoriteMoviesUseCase
+    private val getFavoriteTvShowsUseCase: GetFavoriteTvShowsUseCase
 ) : ViewModel() {
 
-    private val _favoriteMovies = MutableStateFlow<List<FavoriteMoviesEntity>>(emptyList())
+    private val _favoriteMovies = MutableStateFlow<List<FavoriteTvShowsEntity>>(emptyList())
     val favoriteMovies = _favoriteMovies
 
     init {
@@ -27,7 +27,7 @@ class FavoritesViewModel @Inject constructor(
     }
 
     private fun getFavoriteMovies() = viewModelScope.launch(Dispatchers.IO) {
-        getFavoriteMoviesUseCase
+        getFavoriteTvShowsUseCase
             .invoke()
             .onStart {
                 //Loading

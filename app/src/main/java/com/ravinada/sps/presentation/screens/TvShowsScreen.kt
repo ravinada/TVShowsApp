@@ -1,6 +1,6 @@
 package com.ravinada.sps.presentation.screens
 
-import com.ravinada.sps.domain.MovieDomain
+import com.ravinada.sps.domain.TvShowsDomain
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -97,7 +97,7 @@ fun HeaderMoviesScreen(
     var isEmpty by rememberSaveable { mutableStateOf(false) }
     var isInternetError by rememberSaveable { mutableStateOf(false) }
 
-    var popularMoviesList by rememberSaveable { mutableStateOf(listOf<MovieDomain>()) }
+    var popularMoviesList by rememberSaveable { mutableStateOf(listOf<TvShowsDomain>()) }
 
     LaunchedEffect(key1 = popularMoviesState) {
         when (popularMoviesState) {
@@ -188,8 +188,8 @@ fun HeaderMoviesScreen(
 @Preview
 @Composable
 fun MoviesScreenPrev() {
-    val moviesTests = listOf<MovieDomain>(
-        MovieDomain(
+    val moviesTests = listOf<TvShowsDomain>(
+        TvShowsDomain(
             id = 1,
             title = "Ant-Man y la Avispa: Quantumanía",
             overview = "La pareja de superhéroes Scott Lang y Hope van Dyne regresa para continuar sus aventuras como Ant-Man y la Avispa. Los dos, junto a los padres de Hope, Hank Pym y Janet van Dyne y la hija de Scott, Cassie Lang, se dedican a explorar el Mundo Cuántico, interactuando con nuevas y extrañas criaturas y embarcándose en una aventura que les llevará más allá de los límites de lo que creían posible.",
@@ -197,7 +197,7 @@ fun MoviesScreenPrev() {
             vote_average = 6.5f,
             release_date = "2022-02-17"
         ),
-        MovieDomain(
+        TvShowsDomain(
             id = 2,
             title = "Sisu",
             overview = "En lo profundo de la naturaleza salvaje de Laponia, Aatami Korpi está buscando oro, pero después de tropezar con una patrulla nazi, comienza una persecución impresionante y hambrienta de oro a través de la naturaleza salvaje de Laponia destruida y minada.",

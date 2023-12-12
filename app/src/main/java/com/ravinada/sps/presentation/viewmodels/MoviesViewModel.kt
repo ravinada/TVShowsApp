@@ -3,9 +3,9 @@ package com.ravinada.sps.presentation.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ravinada.sps.domain.NoConnectivityException
-import com.ravinada.sps.usecases.GetPopularMoviesUseCase
+import com.ravinada.sps.usecases.GetTrendingTvShowsUseCase
 import com.ravinada.sps.usecases.PopularMoviesResult
-import com.ravinada.sps.usecases.SearchMovieUseCase
+import com.ravinada.sps.usecases.SearchTvShowUseCase
 import com.ravinada.sps.BuildConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,8 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
-    private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
-    private val searchMovieUseCase: SearchMovieUseCase
+    private val getTrendingTvShowsUseCase: GetTrendingTvShowsUseCase,
+    private val searchTvShowUseCase: SearchTvShowUseCase
 ) : ViewModel() {
 
     private val _moviesStateResult =
@@ -34,14 +34,13 @@ class MoviesViewModel @Inject constructor(
     )
 
     init {
-        getPopularMovies()
+        getTrendingTvShows()
     }
 
-    fun getPopularMovies() = viewModelScope.launch(Dispatchers.IO) {
-        getPopularMoviesUseCase.invoke(
+    private fun getTrendingTvShows() = viewModelScope.launch(Dispatchers.IO) {
+        getTrendingTvShowsUseCase.invoke(
             api_key = BuildConfig.API_KEY,
             language = "en-US",
-            page = 1
         ).onStart {
             _moviesStateResult.value = PopularMoviesResult.Loading(true)
         }.onEach {
@@ -63,7 +62,7 @@ class MoviesViewModel @Inject constructor(
 
     fun searchMovieOrEmpty(query: String) {
         if (query.isEmpty()) {
-            getPopularMovies()
+            getTrendingTvShows()
             return
         }
         // Search movie only if query is not empty
@@ -71,7 +70,7 @@ class MoviesViewModel @Inject constructor(
     }
 
     private fun searchMovie(query: String) = viewModelScope.launch(Dispatchers.IO) {
-        searchMovieUseCase.invoke(
+        searchTvShowUseCase.invoke(
             api_key = BuildConfig.API_KEY,
             language = "en-US",
             query = query,
@@ -85,14 +84,8 @@ class MoviesViewModel @Inject constructor(
             }
             _moviesStateResult.value = PopularMoviesResult.Success(it)
         }.catch {
-            when (it) {
-
-                else -> {
-                    _moviesStateResult.value =
-                        PopularMoviesResult.ErrorGeneral(it.message ?: "Error general")
-                }
-            }
+            _moviesStateResult.value =
+                PopularMoviesResult.ErrorGeneral(it.message ?: "Error general")
         }.launchIn(viewModelScope)
     }
-
 }

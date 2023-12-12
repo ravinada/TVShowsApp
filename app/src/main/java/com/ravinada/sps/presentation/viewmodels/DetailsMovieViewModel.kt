@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ravinada.sps.domain.MovieDetailDomain
 import com.ravinada.sps.domain.local.toFavoriteMoviesEntity
-import com.ravinada.sps.usecases.DeleteFavoriteMovieUseCase
+import com.ravinada.sps.usecases.DeleteFavoriteTvShowUseCase
 import com.ravinada.sps.usecases.GetDetailsMovieResult
 import com.ravinada.sps.usecases.GetDetailsMovieUseCase
-import com.ravinada.sps.usecases.GetFavoriteMovieByIdUseCase
+import com.ravinada.sps.usecases.GetFavoriteTvShowByIdUseCase
 import com.ravinada.sps.usecases.InsertFavoriteMovieUseCase
 import com.ravinada.sps.BuildConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,8 +30,8 @@ class DetailsMovieViewModel @Inject constructor(
     private val getDetailsMovieUseCase: GetDetailsMovieUseCase,
     savedStateHandle: SavedStateHandle,
     private val insertFavoriteMovieUseCase: InsertFavoriteMovieUseCase,
-    private val getFavoriteMovieUseCase: GetFavoriteMovieByIdUseCase,
-    private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase
+    private val getFavoriteMovieUseCase: GetFavoriteTvShowByIdUseCase,
+    private val deleteFavoriteTvShowUseCase: DeleteFavoriteTvShowUseCase
 ) : ViewModel() {
 
     private val _detailsMovie =
@@ -92,7 +92,7 @@ class DetailsMovieViewModel @Inject constructor(
     private fun unMarkFavoriteMovie(movie: MovieDetailDomain) =
         viewModelScope.launch(Dispatchers.IO) {
             val favoriteMovie = (movie.id ?: 0)
-            deleteFavoriteMovieUseCase.invoke(favoriteMovie)
+            deleteFavoriteTvShowUseCase.invoke(favoriteMovie)
 
         }
 

@@ -1,25 +1,24 @@
 package com.ravinada.sps.usecases
 
-import com.ravinada.sps.domain.MovieDomain
-import com.ravinada.sps.data.repository.IMoviesRepository
+import com.ravinada.sps.domain.TvShowsDomain
+import com.ravinada.sps.data.repository.ITvShowsRepository
 import kotlinx.coroutines.flow.map
 import com.ravinada.sps.domain.toDomainModel
 import javax.inject.Inject
 
-class GetPopularMoviesUseCase @Inject constructor(
-    private val iMoviesRepository: IMoviesRepository
+class GetTrendingTvShowsUseCase @Inject constructor(
+    private val iTvShowsRepository: ITvShowsRepository
 ) {
     suspend operator fun invoke(
         api_key: String,
         language: String,
-        page: Int
-    ) = iMoviesRepository.getPopularMovies(api_key, language, page).map {
+    ) = iTvShowsRepository.getTrendingTvShows(api_key, language).map {
         it.results.toDomainModel()
     }
 }
 
 sealed class PopularMoviesResult {
-    data class Success(val list: List<MovieDomain>) : PopularMoviesResult()
+    data class Success(val list: List<TvShowsDomain>) : PopularMoviesResult()
     data class ErrorGeneral(val error: String) : PopularMoviesResult()
     data class Loading(val isLoading: Boolean) : PopularMoviesResult()
     object InternetError : PopularMoviesResult()

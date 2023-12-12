@@ -1,43 +1,40 @@
 package com.ravinada.sps.data.remote
 
-import com.ravinada.sps.domain.PopularsMovieResponse
-import com.ravinada.sps.domain.MoviesDetailResponse
+import com.ravinada.sps.domain.TrendingTvShowsResponse
+import com.ravinada.sps.domain.TvShowsDetailResponse
 import com.ravinada.sps.framework.network.BaseDataSource
 import javax.inject.Inject
 
-interface IMoviesService {
-    suspend fun getPopularMovies(
+interface ITvShowsService {
+    suspend fun getTrendingTvShows(
         apiKey: String,
-        language: String,
-        page: Int
-    ): PopularsMovieResponse
+        language: String
+    ): TrendingTvShowsResponse
 
     suspend fun getMovieDetail(
         apiKey: String,
         language: String,
         id: String
-    ): MoviesDetailResponse
+    ): TvShowsDetailResponse
 
     suspend fun searchMovie(
         query: String,
         apiKey: String,
         language: String,
-    ): PopularsMovieResponse
+    ): TrendingTvShowsResponse
 }
 
-class MoviesServiceImpl @Inject constructor(
-    private val moviesService: MoviesService
-) : BaseDataSource(), IMoviesService {
-    override suspend fun getPopularMovies(
+class TvShowsServiceImpl @Inject constructor(
+    private val tvShowsService: TvShowsService
+) : BaseDataSource(), ITvShowsService {
+    override suspend fun getTrendingTvShows(
         apiKey: String,
-        language: String,
-        page: Int
+        language: String
     ) = getResult(
         call = {
-            moviesService.getPopularMovies(
+            tvShowsService.getTrendingTvShows(
                 apiKey = apiKey,
-                language = language,
-                page = page
+                language = language
             )
         },
         forceError = false
@@ -48,7 +45,7 @@ class MoviesServiceImpl @Inject constructor(
         language: String,
         id: String
     ) = getResult(
-        call = { moviesService.getMovieDetail(apiKey = apiKey, language = language, id = id) },
+        call = { tvShowsService.getMovieDetail(apiKey = apiKey, language = language, id = id) },
         forceError = false
     )
 
@@ -57,7 +54,7 @@ class MoviesServiceImpl @Inject constructor(
         apiKey: String,
         language: String
     ) = getResult(
-        call = { moviesService.searchMovie(query = query, apiKey = apiKey, language = language) },
+        call = { tvShowsService.searchMovie(query = query, apiKey = apiKey, language = language) },
         forceError = false
     )
 }

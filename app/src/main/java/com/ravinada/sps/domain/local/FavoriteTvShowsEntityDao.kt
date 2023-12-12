@@ -4,22 +4,21 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.ravinada.sps.domain.local.FavoriteMoviesEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface FavoriteMoviesEntityDao {
+interface FavoriteTvShowsEntityDao {
 
     @Query("SELECT * FROM favorite_movies")
-    fun getAll(): Flow<List<FavoriteMoviesEntity>>
+    fun getAll(): Flow<List<FavoriteTvShowsEntity>>
 
     @Query("SELECT * FROM favorite_movies WHERE id = :id")
-    fun getById(id: Int): Flow<FavoriteMoviesEntity>
+    fun getById(id: Int): Flow<FavoriteTvShowsEntity>
 
     @Query("DELETE FROM favorite_movies WHERE id = :id")
     suspend fun deleteById(id: Int)
 
     //add
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(favoriteMoviesEntity: FavoriteMoviesEntity)
+    suspend fun insert(favoriteTvShowsEntity: FavoriteTvShowsEntity)
 }

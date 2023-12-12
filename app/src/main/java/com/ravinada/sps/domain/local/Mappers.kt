@@ -2,9 +2,8 @@ package com.ravinada.sps.domain.local
 
 import com.ravinada.sps.domain.MovieDetailDomain
 
-
-fun MovieDetailDomain.toFavoriteMoviesEntity(): FavoriteMoviesEntity {
-    return FavoriteMoviesEntity(
+fun MovieDetailDomain.toFavoriteMoviesEntity(): FavoriteTvShowsEntity {
+    return FavoriteTvShowsEntity(
         id = this.id ?: 0,
         poster_path = this.poster_path ?: "",
         overview = this.overview ?: "",

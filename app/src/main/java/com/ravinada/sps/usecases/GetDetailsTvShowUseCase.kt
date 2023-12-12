@@ -1,19 +1,19 @@
 package com.ravinada.sps.usecases
 
-import com.ravinada.sps.data.repository.IMoviesRepository
+import com.ravinada.sps.data.repository.ITvShowsRepository
 import com.ravinada.sps.domain.MovieDetailDomain
 import com.ravinada.sps.domain.toDomainModel
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class GetDetailsMovieUseCase @Inject constructor(
-    private val iMoviesRepository: IMoviesRepository
+    private val iTvShowsRepository: ITvShowsRepository
 ) {
     suspend operator fun invoke(
         api_key: String,
         language: String,
         id: String
-    ) = iMoviesRepository.getMovieDetail(api_key, language, id).map {
+    ) = iTvShowsRepository.getTvShowDetail(api_key, language, id).map {
         it.toDomainModel()
     }
 }

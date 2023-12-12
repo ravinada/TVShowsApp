@@ -2,7 +2,7 @@ package com.ravinada.sps.domain
 
 import com.ravinada.sps.BuildConfig
 
-data class MoviesDetailResponse(
+data class TvShowsDetailResponse(
     val adult: Boolean? = null,
     val backdrop_path: String? = null,
     val belongs_to_collection: BelongsToCollection? = null,
@@ -123,7 +123,7 @@ data class SpokenLanguageDomain(
 
 //Mapper to Domain
 
-fun MoviesDetailResponse.toDomainModel(): MovieDetailDomain {
+fun TvShowsDetailResponse.toDomainModel(): MovieDetailDomain {
     return MovieDetailDomain(
         adult = this.adult,
         backdrop_path = BuildConfig.IMAGE_URL + this.backdrop_path,

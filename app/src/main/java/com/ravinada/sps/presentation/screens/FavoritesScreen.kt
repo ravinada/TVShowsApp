@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ravinada.sps.domain.local.FavoriteMoviesEntity
+import com.ravinada.sps.domain.local.FavoriteTvShowsEntity
 import com.ravinada.sps.R
 import com.ravinada.sps.presentation.composables.CustomEmptyStateScreen
 import com.ravinada.sps.presentation.composables.VerticalMovieItem
@@ -23,7 +23,7 @@ import com.ravinada.sps.presentation.composables.VerticalMovieItem
 @Composable
 fun FavoritesScreen(
     onClickNavigateToDetails: (Int) -> Unit,
-    favoriteMovies: List<FavoriteMoviesEntity>,
+    favoriteMovies: List<FavoriteTvShowsEntity>,
 ) {
     when {
         favoriteMovies.isEmpty() -> {
@@ -68,7 +68,7 @@ fun PreviewFavoritesScreen() {
     FavoritesScreen(
         onClickNavigateToDetails = {},
         favoriteMovies = listOf(
-            FavoriteMoviesEntity(
+            FavoriteTvShowsEntity(
                 id = 1,
                 title = "Title",
                 overview = "Release",
@@ -76,7 +76,7 @@ fun PreviewFavoritesScreen() {
                 vote_average = 7.5f,
                 release_date = "2021-08-11",
             ),
-            FavoriteMoviesEntity(
+            FavoriteTvShowsEntity(
                 id = 2,
                 title = "Title",
                 overview = "Release",
