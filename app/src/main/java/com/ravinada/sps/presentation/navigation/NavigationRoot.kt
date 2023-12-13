@@ -99,7 +99,7 @@ sealed class DetailsScreen(val route: String) {
 }
 
 sealed class HomeScreen(val route: String, val icon: Int, val title: String) {
-    object TvShowsHomeScreen : HomeScreen("tvShows_screen", R.drawable.ic_tv_show, "TvShows")
+    object TvShowsHomeScreen : HomeScreen("tvShows_screen", R.drawable.ic_tv_show, "Tv Shows")
     object FavoritesHomeScreen : HomeScreen("favorites_screen", R.drawable.ic_love, "Favorites")
 }
 

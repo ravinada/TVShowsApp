@@ -53,13 +53,11 @@ fun FavoritesScreen(
                         if (it == favoriteTvShows.last()) {
                             Spacer(modifier = Modifier.height(80.dp))
                         }
-
                     }
                 }
             )
         }
     }
-
 }
 
 @Preview

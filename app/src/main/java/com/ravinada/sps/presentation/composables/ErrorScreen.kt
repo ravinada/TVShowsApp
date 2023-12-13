@@ -51,7 +51,6 @@ fun CustomErrorScreenSomethingHappens(
     CustomEmptyStateScreen(
         modifier = modifier,
         title = stringResource(id = R.string.empty_screen_title_error_something_went_wrong),
-        //Algo pasó, por favor intenta de nuevo
         description = stringResource(id = R.string.empty_screen_description_error_something_went_wrong),
         image = R.drawable.background_something_wrong
     )
@@ -65,7 +64,6 @@ fun CustomNoInternetConnectionScreen(
     CustomEmptyStateScreen(
         modifier = modifier,
         title = stringResource(id = R.string.empty_screen_title_no_internet),
-        //Algo pasó, por favor intenta de nuevo
         description = stringResource(id = R.string.empty_screen_description_no_internet),
         image = R.drawable.background_no_internet_connection
     )

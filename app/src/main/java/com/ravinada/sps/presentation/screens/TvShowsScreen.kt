@@ -59,11 +59,11 @@ fun TvShowsScreen(
                 searchQuery = queryChanged // update the query state
                 onQueryChange(queryChanged) // call the callback
             },
-            onSearch = { query ->
+            onSearch = {
                 // Handle search ImeAction.Search here
             },
             active = true,
-            onActiveChange = { isActive ->
+            onActiveChange = {
             },
             placeholder = { Text("Search for a tv-shows") },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },

@@ -30,7 +30,6 @@ fun DetailsTvShowScreen(
 
     var item by remember { mutableStateOf(TvShowsDetailDomain()) }
 
-
     LaunchedEffect(key1 = getDetailsTvShowsResult) {
         when (getDetailsTvShowsResult) {
             is GetDetailsTvShowsResult.Success -> {

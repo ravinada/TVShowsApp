@@ -321,9 +321,7 @@ fun HorizontalThreeOptions(
             fontWeight = FontWeight(600),
             fontFamily = FontFamily(Font(R.font.googlesans_regular, FontWeight.Normal)),
         )
-
     }
-
 }
 
 
