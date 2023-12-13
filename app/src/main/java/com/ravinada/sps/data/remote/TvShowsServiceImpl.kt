@@ -11,13 +11,13 @@ interface ITvShowsService {
         language: String
     ): TrendingTvShowsResponse
 
-    suspend fun getMovieDetail(
+    suspend fun getTvShowsAppDetail(
         apiKey: String,
         language: String,
         id: String
     ): TvShowsDetailResponse
 
-    suspend fun searchMovie(
+    suspend fun searchTvShow(
         query: String,
         apiKey: String,
         language: String,
@@ -40,21 +40,21 @@ class TvShowsServiceImpl @Inject constructor(
         forceError = false
     )
 
-    override suspend fun getMovieDetail(
+    override suspend fun getTvShowsAppDetail(
         apiKey: String,
         language: String,
         id: String
     ) = getResult(
-        call = { tvShowsService.getMovieDetail(apiKey = apiKey, language = language, id = id) },
+        call = { tvShowsService.getTvShowsDetail(apiKey = apiKey, language = language, id = id) },
         forceError = false
     )
 
-    override suspend fun searchMovie(
+    override suspend fun searchTvShow(
         query: String,
         apiKey: String,
         language: String
     ) = getResult(
-        call = { tvShowsService.searchMovie(query = query, apiKey = apiKey, language = language) },
+        call = { tvShowsService.searchTvShow(query = query, apiKey = apiKey, language = language) },
         forceError = false
     )
 }

@@ -25,7 +25,6 @@ interface ITvShowsRemoteDataSource {
     ): Flow<TrendingTvShowsResponse>
 }
 
-
 class TvShowsRemoteDataSource @Inject constructor(
     private val iTvShowsService: ITvShowsService
 ) : ITvShowsRemoteDataSource {
@@ -42,7 +41,7 @@ class TvShowsRemoteDataSource @Inject constructor(
         language: String,
         id: String
     ) = performNetworkFlow {
-        iTvShowsService.getMovieDetail(apiKey, language, id)
+        iTvShowsService.getTvShowsAppDetail(apiKey, language, id)
     }
 
     override suspend fun searchTvShow(
@@ -50,6 +49,6 @@ class TvShowsRemoteDataSource @Inject constructor(
         apiKey: String,
         language: String
     ) = performNetworkFlow {
-        iTvShowsService.searchMovie(query, apiKey, language)
+        iTvShowsService.searchTvShow(query, apiKey, language)
     }
 }

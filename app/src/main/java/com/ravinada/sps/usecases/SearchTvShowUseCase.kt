@@ -1,18 +1,18 @@
 package com.ravinada.sps.usecases
 
 import com.ravinada.sps.data.repository.ITvShowsRepository
-import kotlinx.coroutines.flow.map
 import com.ravinada.sps.domain.toDomainModel
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class SearchTvShowUseCase @Inject constructor(
-    private val moviesRepository: ITvShowsRepository
+    private val repository: ITvShowsRepository
 ) {
     suspend operator fun invoke(
         query: String,
         api_key: String,
         language: String
-    ) = moviesRepository.searchTvShow(query, api_key, language).map {
+    ) = repository.searchTvShow(query, api_key, language).map {
         it.results.toDomainModel()
     }
 }

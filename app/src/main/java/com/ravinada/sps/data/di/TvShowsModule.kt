@@ -19,11 +19,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class MoviesModule {
+abstract class TvShowsModule {
 
     @Singleton
     @Binds
-    abstract fun provideMovieServices(
+    abstract fun provideTvShowServices(
         moviesServiceImpl: TvShowsServiceImpl
     ): ITvShowsService
 
@@ -35,26 +35,26 @@ abstract class MoviesModule {
 
     @Singleton
     @Binds
-    abstract fun provideMoviesRepository(
+    abstract fun provideTvShowsRepository(
         tvShowsRepositoryImpl: TvShowsRepository
     ): ITvShowsRepository
 
 
     @Singleton
     @Binds
-    abstract fun provideMoviesLocalDataSource(
-        moviesLocalDataSourceImpl: FavoriteTvShowsLocalDataSourceImpl
+    abstract fun provideTvShowsLocalDataSource(
+        tvShowsLocalDataSourceImpl: FavoriteTvShowsLocalDataSourceImpl
     ): IFavoriteTvShowsLocalDataSource
 
 }
 
 @Module
 @InstallIn(SingletonComponent::class)
-object MoviesModuleObj {
+object TvShowsModuleObj {
 
     @Singleton
     @Provides
-    fun provideMoviesService(
+    fun provideTvShowsService(
         retrofit: Retrofit
     ): TvShowsService {
         return retrofit.create(TvShowsService::class.java)

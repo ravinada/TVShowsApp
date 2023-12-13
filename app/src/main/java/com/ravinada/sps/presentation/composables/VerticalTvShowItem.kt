@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
 @Composable
-fun VerticalMovieItem(
+fun VerticalTvShowItem(
     title: String,
     release: String,
     imageUrl: String,
@@ -49,7 +49,7 @@ fun VerticalMovieItem(
                         .height(200.dp)
                         .fillMaxSize(),
                     model = imageUrl,
-                    contentDescription = "Movie Image",
+                    contentDescription = "TvShow Image",
                     contentScale = androidx.compose.ui.layout.ContentScale.FillBounds,
                 )
             }
@@ -82,8 +82,8 @@ fun VerticalMovieItem(
 
 @Preview
 @Composable
-fun VerticalMovieItemPrev() {
-    VerticalMovieItem(
+fun VerticalTvShowItemPrev() {
+    VerticalTvShowItem(
         title = "Fast & Furious X",
         release = "2021-06-25",
         imageUrl = "https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",

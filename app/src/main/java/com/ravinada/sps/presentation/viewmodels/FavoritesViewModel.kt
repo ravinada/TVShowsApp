@@ -19,22 +19,22 @@ class FavoritesViewModel @Inject constructor(
     private val getFavoriteTvShowsUseCase: GetFavoriteTvShowsUseCase
 ) : ViewModel() {
 
-    private val _favoriteMovies = MutableStateFlow<List<FavoriteTvShowsEntity>>(emptyList())
-    val favoriteMovies = _favoriteMovies
+    private val mutableStateFlow = MutableStateFlow<List<FavoriteTvShowsEntity>>(emptyList())
+    val stateFlow = mutableStateFlow
 
     init {
-        getFavoriteMovies()
+        getFavoriteTvShows()
     }
 
-    private fun getFavoriteMovies() = viewModelScope.launch(Dispatchers.IO) {
+    private fun getFavoriteTvShows() = viewModelScope.launch(Dispatchers.IO) {
         getFavoriteTvShowsUseCase
             .invoke()
             .onStart {
                 //Loading
             }.onEach {
-                _favoriteMovies.value = it
+                mutableStateFlow.value = it
             }.catch {
-                _favoriteMovies.value = emptyList()
+                mutableStateFlow.value = emptyList()
             }.launchIn(viewModelScope)
     }
 }

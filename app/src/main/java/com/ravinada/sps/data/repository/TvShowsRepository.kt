@@ -1,8 +1,8 @@
 package com.ravinada.sps.data.repository
 
-import com.ravinada.sps.domain.TrendingTvShowsResponse
 import com.ravinada.sps.data.local.IFavoriteTvShowsLocalDataSource
 import com.ravinada.sps.data.remote.ITvShowsRemoteDataSource
+import com.ravinada.sps.domain.TrendingTvShowsResponse
 import com.ravinada.sps.domain.TvShowsDetailResponse
 import com.ravinada.sps.domain.local.FavoriteTvShowsEntity
 import kotlinx.coroutines.flow.Flow

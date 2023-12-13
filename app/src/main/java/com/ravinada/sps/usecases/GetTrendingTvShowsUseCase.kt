@@ -1,9 +1,9 @@
 package com.ravinada.sps.usecases
 
-import com.ravinada.sps.domain.TvShowsDomain
 import com.ravinada.sps.data.repository.ITvShowsRepository
-import kotlinx.coroutines.flow.map
+import com.ravinada.sps.domain.TvShowsDomain
 import com.ravinada.sps.domain.toDomainModel
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class GetTrendingTvShowsUseCase @Inject constructor(
@@ -17,10 +17,10 @@ class GetTrendingTvShowsUseCase @Inject constructor(
     }
 }
 
-sealed class PopularMoviesResult {
-    data class Success(val list: List<TvShowsDomain>) : PopularMoviesResult()
-    data class ErrorGeneral(val error: String) : PopularMoviesResult()
-    data class Loading(val isLoading: Boolean) : PopularMoviesResult()
-    object InternetError : PopularMoviesResult()
-    object Empty : PopularMoviesResult()
+sealed class PopularTvShowsResult {
+    data class Success(val list: List<TvShowsDomain>) : PopularTvShowsResult()
+    data class ErrorGeneral(val error: String) : PopularTvShowsResult()
+    data class Loading(val isLoading: Boolean) : PopularTvShowsResult()
+    object InternetError : PopularTvShowsResult()
+    object Empty : PopularTvShowsResult()
 }

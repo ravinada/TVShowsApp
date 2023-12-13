@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.ravinada.sps.domain.local.FavoriteTvShowsEntity
 import com.ravinada.sps.domain.local.FavoriteTvShowsEntityDao
 
-@Database(entities = [FavoriteTvShowsEntity::class], version = 1)
+@Database(entities = [FavoriteTvShowsEntity::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun favoriteMoviesDao(): FavoriteTvShowsEntityDao
+    abstract fun favoriteTvSHowsDao(): FavoriteTvShowsEntityDao
 }

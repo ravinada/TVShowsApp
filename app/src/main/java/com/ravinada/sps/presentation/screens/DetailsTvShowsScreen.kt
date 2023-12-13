@@ -10,52 +10,52 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.ravinada.sps.domain.MovieDetailDomain
-import com.ravinada.sps.presentation.composables.CustomNoInternetConnectionScreen
+import com.ravinada.sps.domain.TvShowsDetailDomain
 import com.ravinada.sps.presentation.composables.CustomErrorScreenSomethingHappens
+import com.ravinada.sps.presentation.composables.CustomNoInternetConnectionScreen
 import com.ravinada.sps.presentation.composables.LoadingScreen
-import com.ravinada.sps.usecases.GetDetailsMovieResult
+import com.ravinada.sps.usecases.GetDetailsTvShowsResult
 
 @Composable
-fun DetailsMovieScreen(
+fun DetailsTvShowScreen(
     navController: NavController,
-    stateMovieDetail: GetDetailsMovieResult,
-    onClickFavorite: (MovieDetailDomain) -> Unit,
-    isFavoriteMovie: Boolean,
+    getDetailsTvShowsResult: GetDetailsTvShowsResult,
+    onClickFavorite: (TvShowsDetailDomain) -> Unit,
+    isFavoriteTvShow: Boolean,
 ) {
     var isLoading by remember { mutableStateOf(false) }
     var isError by remember { mutableStateOf(false) }
     var isSuccess by remember { mutableStateOf(false) }
     var isInternetError by remember { mutableStateOf(false) }
 
-    var item by remember { mutableStateOf(MovieDetailDomain()) }
+    var item by remember { mutableStateOf(TvShowsDetailDomain()) }
 
 
-    LaunchedEffect(key1 = stateMovieDetail) {
-        when (stateMovieDetail) {
-            is GetDetailsMovieResult.Success -> {
+    LaunchedEffect(key1 = getDetailsTvShowsResult) {
+        when (getDetailsTvShowsResult) {
+            is GetDetailsTvShowsResult.Success -> {
                 isLoading = false
                 isError = false
                 isInternetError = false
                 isSuccess = true
-                item = stateMovieDetail.data
+                item = getDetailsTvShowsResult.data
             }
 
-            is GetDetailsMovieResult.Error -> {
+            is GetDetailsTvShowsResult.Error -> {
                 isLoading = false
                 isSuccess = false
                 isError = true
                 isInternetError = false
             }
 
-            is GetDetailsMovieResult.Loading -> {
+            is GetDetailsTvShowsResult.Loading -> {
                 isError = false
                 isSuccess = false
                 isInternetError = true
-                isLoading = stateMovieDetail.isLoading
+                isLoading = getDetailsTvShowsResult.isLoading
             }
 
-            is GetDetailsMovieResult.InternetError -> {
+            is GetDetailsTvShowsResult.InternetError -> {
                 isLoading = false
                 isError = false
                 isInternetError = true
@@ -79,20 +79,20 @@ fun DetailsMovieScreen(
             }
 
             isSuccess -> {
-                DetailsMovieContent(
+                DetailsTvShowContent(
                     onClickBack = {
                         navController.popBackStack()
                     },
                     onClickFavorite = { onClickFavorite(item) },
-                    title = item.title ?: "",
+                    title = item.original_name ?: "",
                     description = item.overview ?: "",
                     imageBackdrop = item.backdrop_path ?: "",
                     imagePoster = item.poster_path ?: "",
                     genres = item.genres ?: listOf(),
-                    releaseDate = item.release_date ?: "",
+                    releaseDate = item.first_air_date ?: "",
                     voteAverage = item.vote_average?.toString() ?: "",
-                    runtime = item.runtimeWithMinutes ?: "",
-                    isFavoriteMovie = isFavoriteMovie
+                    runtime = item.number_of_seasons ?: "",
+                    isFavoriteTvShow = isFavoriteTvShow
                 )
             }
         }

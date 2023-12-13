@@ -32,12 +32,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.ravinada.sps.R
 import com.ravinada.sps.domain.GenreDomain
 import com.ravinada.sps.ui.theme.Green40
-import com.ravinada.sps.R
 
 @Composable
-fun DetailsMovieContent(
+fun DetailsTvShowContent(
     onClickBack: () -> Unit,
     onClickFavorite: () -> Unit,
     title: String,
@@ -48,11 +48,11 @@ fun DetailsMovieContent(
     releaseDate: String,
     voteAverage: String,
     runtime: String,
-    isFavoriteMovie: Boolean,
+    isFavoriteTvShow: Boolean,
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -85,7 +85,7 @@ fun DetailsMovieContent(
                 modifier = Modifier.clickable {
                     onClickFavorite()
                 },
-                painter = painterResource(id = if (isFavoriteMovie) R.drawable.ic_love else R.drawable.ic_love_border),
+                painter = painterResource(id = if (isFavoriteTvShow) R.drawable.ic_love else R.drawable.ic_love_border),
                 contentDescription = null,
                 tint = Color.Black,
             )
@@ -329,17 +329,18 @@ fun HorizontalThreeOptions(
 
 @Preview
 @Composable
-fun DetailsMovieContentPrev() {
-    DetailsMovieContent(
-        title = "Spider-man No Way Home",
-        description = "From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences.",        imageBackdrop = "https://image.tmdb.org/t/p/w500/vViRXFnSyGJ2fzMbcc5sqTKswcd.jpg",
-        imagePoster = "https://image.tmdb.org/t/p/w500/eLzStFuergouErSQlfABthuQHCJ.jpg",
+fun DetailsTvShowContentPrev() {
+    DetailsTvShowContent(
+        title = "Doctor Who",
+        description = "The Doctor is a Time Lord: a 900 year old alien with 2 hearts, part of a gifted civilization who mastered time travel. The Doctor saves planets for a living—more of a hobby actually, and the Doctor's very, very good at it.",
+        imagePoster = "https://image.tmdb.org/t/p/original/4edFyasCrkH4MKs6H4mHqlrxA6b.jpg",
+        imageBackdrop = "https://image.tmdb.org/t/p/w500/vViRXFnSyGJ2fzMbcc5sqTKswcd.jpg",
         genres = listOf(GenreDomain(name = "Action")),
         releaseDate = "2021-12-15",
         voteAverage = "9.5",
-        runtime = "118 minutes",
+        runtime = "7 season",
         onClickBack = {},
         onClickFavorite = {},
-        isFavoriteMovie = false
+        isFavoriteTvShow = false
     )
 }

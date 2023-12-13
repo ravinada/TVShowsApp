@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface FavoriteTvShowsEntityDao {
 
-    @Query("SELECT * FROM favorite_movies")
+    @Query("SELECT * FROM favorite_tvShows")
     fun getAll(): Flow<List<FavoriteTvShowsEntity>>
 
-    @Query("SELECT * FROM favorite_movies WHERE id = :id")
+    @Query("SELECT * FROM favorite_tvShows WHERE id = :id")
     fun getById(id: Int): Flow<FavoriteTvShowsEntity>
 
-    @Query("DELETE FROM favorite_movies WHERE id = :id")
+    @Query("DELETE FROM favorite_tvShows WHERE id = :id")
     suspend fun deleteById(id: Int)
 
     //add

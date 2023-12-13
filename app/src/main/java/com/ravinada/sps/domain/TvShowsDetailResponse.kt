@@ -5,36 +5,36 @@ import com.ravinada.sps.BuildConfig
 data class TvShowsDetailResponse(
     val adult: Boolean? = null,
     val backdrop_path: String? = null,
-    val belongs_to_collection: BelongsToCollection? = null,
-    val budget: Int? = null,
+    val created_by: List<CreatedBy>? = null,
+    val episode_run_time: List<Any>? = null,
+    val first_air_date: String? = null,
     val genres: List<Genre>? = null,
     val homepage: String? = null,
     val id: Int? = null,
-    val imdb_id: String? = null,
+    val in_production: Boolean? = null,
+    val languages: List<String>? = null,
+    val last_air_date: String? = null,
+    val last_episode_to_air: LastEpisodeToAir? = null,
+    val name: String? = null,
+    val networks: List<Network>? = null,
+    val next_episode_to_air: Any? = null,
+    val number_of_episodes: Int? = null,
+    val number_of_seasons: Int? = null,
+    val origin_country: List<String>? = null,
     val original_language: String? = null,
-    val original_title: String? = null,
+    val original_name: String? = null,
     val overview: String? = null,
     val popularity: Double? = null,
     val poster_path: String? = null,
     val production_companies: List<ProductionCompany>? = null,
     val production_countries: List<ProductionCountry>? = null,
-    val release_date: String? = null,
-    val revenue: Int? = null,
-    val runtime: Int? = null,
+    val seasons: List<Season>? = null,
     val spoken_languages: List<SpokenLanguage>? = null,
     val status: String? = null,
     val tagline: String? = null,
-    val title: String? = null,
-    val video: Boolean? = null,
+    val type: String? = null,
     val vote_average: Double? = null,
     val vote_count: Int? = null
-)
-
-data class BelongsToCollection(
-    val backdrop_path: String,
-    val id: Int,
-    val name: String,
-    val poster_path: String
 )
 
 data class Genre(
@@ -62,40 +62,16 @@ data class SpokenLanguage(
 
 //Domain
 
-data class MovieDetailDomain(
-    val adult: Boolean? = null,
-    val backdrop_path: String? = null,
-    val belongs_to_collection: BelongsToCollectionDomain? = null,
-    val budget: Int? = null,
-    val genres: List<GenreDomain>? = null,
-    val homepage: String? = null,
+data class TvShowsDetailDomain(
     val id: Int? = null,
-    val imdb_id: String? = null,
-    val original_language: String? = null,
-    val original_title: String? = null,
+    val original_name: String? = null,
     val overview: String? = null,
-    val popularity: Double? = null,
+    val first_air_date: String? = null,
     val poster_path: String? = null,
-    val production_companies: List<ProductionCompanyDomain>? = null,
-    val production_countries: List<ProductionCountryDomain>? = null,
-    val release_date: String? = null,
-    val revenue: Int? = null,
-    val runtime: Int? = null,
-    val runtimeWithMinutes: String? = null,
-    val spoken_languages: List<SpokenLanguageDomain>? = null,
-    val status: String? = null,
-    val tagline: String? = null,
-    val title: String? = null,
-    val video: Boolean? = null,
-    val vote_average: Double? = null,
-    val vote_count: Int? = null
-)
-
-data class BelongsToCollectionDomain(
+    val number_of_seasons: String? = null,
+    val genres: List<GenreDomain>? = null,
     val backdrop_path: String? = null,
-    val id: Int? = null,
-    val name: String? = null,
-    val poster_path: String? = null,
+    val vote_average: Double? = null,
 )
 
 data class GenreDomain(
@@ -103,63 +79,59 @@ data class GenreDomain(
     val name: String? = null,
 )
 
-data class ProductionCompanyDomain(
-    val id: Int? = null,
-    val logo_path: String? = null,
-    val name: String? = null,
-    val origin_country: String? = null,
+data class CreatedBy(
+    val credit_id: String,
+    val gender: Int,
+    val id: Int,
+    val name: String,
+    val profile_path: String
 )
 
-data class ProductionCountryDomain(
-    val iso_3166_1: String? = null,
-    val name: String? = null,
+data class LastEpisodeToAir(
+    val air_date: String,
+    val episode_number: Int,
+    val episode_type: String,
+    val id: Int,
+    val name: String,
+    val overview: String,
+    val production_code: String,
+    val runtime: Int,
+    val season_number: Int,
+    val show_id: Int,
+    val still_path: String,
+    val vote_average: Double,
+    val vote_count: Int
 )
 
-data class SpokenLanguageDomain(
-    val english_name: String? = null,
-    val iso_639_1: String? = null,
-    val name: String? = null,
+data class Network(
+    val id: Int,
+    val logo_path: String,
+    val name: String,
+    val origin_country: String
 )
 
-//Mapper to Domain
+data class Season(
+    val air_date: String,
+    val episode_count: Int,
+    val id: Int,
+    val name: String,
+    val overview: String,
+    val poster_path: String,
+    val season_number: Int,
+    val vote_average: Double
+)
 
-fun TvShowsDetailResponse.toDomainModel(): MovieDetailDomain {
-    return MovieDetailDomain(
-        adult = this.adult,
-        backdrop_path = BuildConfig.IMAGE_URL + this.backdrop_path,
-        belongs_to_collection = this.belongs_to_collection?.toDomainBelongsCollection(),
-        budget = this.budget,
+fun TvShowsDetailResponse.toDomainModel(): TvShowsDetailDomain {
+    return TvShowsDetailDomain(
+        id = this.id,
         genres = this.genres?.toDomainGenre(),
-        homepage = this.homepage,
-        id = this.id,
-        imdb_id = this.imdb_id,
-        original_language = this.original_language,
-        original_title = this.original_title,
+        original_name = this.original_name,
         overview = this.overview,
-        popularity = this.popularity,
         poster_path = BuildConfig.IMAGE_URL + this.poster_path,
-        production_companies = this.production_companies?.toDomainProductionCompany(),
-        production_countries = this.production_countries?.toDomainProductionCountry(),
-        release_date = this.release_date,
-        revenue = this.revenue,
-        runtime = this.runtime,
-        runtimeWithMinutes = "${this.runtime} minutos",
-        spoken_languages = this.spoken_languages?.toDomainSpokenLan(),
-        status = this.status,
-        tagline = this.tagline,
-        title = this.title,
-        video = this.video,
+        number_of_seasons = "${this.number_of_seasons.toString()} seasons",
+        first_air_date = this.first_air_date,
         vote_average = this.vote_average,
-        vote_count = this.vote_count
-    )
-}
-
-fun BelongsToCollection.toDomainBelongsCollection(): BelongsToCollectionDomain {
-    return BelongsToCollectionDomain(
-        backdrop_path = this.backdrop_path,
-        id = this.id,
-        name = this.name,
-        poster_path = this.poster_path
+        backdrop_path = BuildConfig.IMAGE_URL + this.backdrop_path
     )
 }
 
@@ -167,36 +139,6 @@ fun List<Genre>.toDomainGenre(): List<GenreDomain> {
     return this.map {
         GenreDomain(
             id = it.id,
-            name = it.name
-        )
-    }
-}
-
-fun List<ProductionCompany>.toDomainProductionCompany(): List<ProductionCompanyDomain> {
-    return this.map {
-        ProductionCompanyDomain(
-            id = it.id,
-            logo_path = it.logo_path,
-            name = it.name,
-            origin_country = it.origin_country
-        )
-    }
-}
-
-fun List<ProductionCountry>.toDomainProductionCountry(): List<ProductionCountryDomain> {
-    return this.map {
-        ProductionCountryDomain(
-            iso_3166_1 = it.iso_3166_1,
-            name = it.name
-        )
-    }
-}
-
-fun List<SpokenLanguage>.toDomainSpokenLan(): List<SpokenLanguageDomain> {
-    return this.map {
-        SpokenLanguageDomain(
-            english_name = it.english_name,
-            iso_639_1 = it.iso_639_1,
             name = it.name
         )
     }

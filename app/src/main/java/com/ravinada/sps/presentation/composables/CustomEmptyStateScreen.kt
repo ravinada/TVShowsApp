@@ -88,7 +88,7 @@ fun CustomEmptyStateScreen(
 
 @Preview
 @Composable
-fun EmptyMoviesScreenPrev() {
+fun EmptyTvShowsScreenPrev() {
     CustomEmptyStateScreen(
 
         image = R.drawable.background_empty_state,
@@ -105,8 +105,8 @@ fun EmptyMoviesScreenPrev() {
 fun NoInternetConnectionPrev() {
     CustomEmptyStateScreen(
         image = R.drawable.background_no_internet_connection,
-        title = "Sin conexión a internet",
-        description = "Revisa tu conexión a internet e intenta nuevamente"
+        title = "No internet connection",
+        description = "Check your internet connection and try again"
     )
 }
 
@@ -115,7 +115,7 @@ fun NoInternetConnectionPrev() {
 fun FavoriteEmptyPrev() {
     CustomEmptyStateScreen(
         image = R.drawable.background_box_empty_state,
-        title = "No tienes favoritos",
-        description = "Agrega películas a tus favoritos para verlas aquí"
+        title = "You don't have favorites",
+        description = "Add tv-shows to your favorites to watch here"
     )
 }

@@ -15,13 +15,13 @@ object AppDatabaseModule {
 
     @Singleton
     @Provides
-    fun provideFavoriteMoviesDao(appDatabase: AppDatabase) = appDatabase.favoriteMoviesDao()
+    fun provideFavoriteTvShowsDao(appDatabase: AppDatabase) = appDatabase.favoriteTvSHowsDao()
 
     @Singleton
     @Provides
     fun provideAppDatabase(@ApplicationContext appContext: Context) = Room.databaseBuilder(
         appContext,
         AppDatabase::class.java,
-        "MoviesApp"
+        "TvShowsApp"
     ).fallbackToDestructiveMigration().build()
 }

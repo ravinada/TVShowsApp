@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "favorite_movies")
+@Entity(tableName = "favorite_tvShows")
 data class FavoriteTvShowsEntity(
     @PrimaryKey val id: Int,
     val poster_path: String,

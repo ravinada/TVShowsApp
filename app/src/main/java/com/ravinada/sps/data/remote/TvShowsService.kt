@@ -14,15 +14,15 @@ interface TvShowsService {
         @Query("language") language: String,
     ): Response<TrendingTvShowsResponse>
 
-    @GET("movie/{id}")
-    suspend fun getMovieDetail(
+    @GET("tv/{id}")
+    suspend fun getTvShowsDetail(
         @Path("id") id: String,
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
-        ): Response<TvShowsDetailResponse>
+    ): Response<TvShowsDetailResponse>
 
-    @GET("search/movie")
-    suspend fun searchMovie(
+    @GET("search/tv")
+    suspend fun searchTvShow(
         @Query("query") query: String,
         @Query("api_key") apiKey: String,
         @Query("language") language: String,

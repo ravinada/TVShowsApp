@@ -22,7 +22,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ravinada.sps.presentation.navigation.HomeScreen
-import com.ravinada.sps.presentation.navigation.homeNavGraph
+import com.ravinada.sps.presentation.navigation.HomeNavGraph
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -37,7 +37,7 @@ fun DashboardScreen() {
         }
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            homeNavGraph(navController = navController)
+            HomeNavGraph(navController = navController)
         }
     }
 }
@@ -46,7 +46,7 @@ fun DashboardScreen() {
 @Composable
 fun BottomBarCustom(navController: NavHostController) {
     val menuItems = listOf(
-        HomeScreen.MoviesHomeScreen,
+        HomeScreen.TvShowsHomeScreen,
         HomeScreen.FavoritesHomeScreen
     )
 

@@ -14,19 +14,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ravinada.sps.domain.local.FavoriteTvShowsEntity
 import com.ravinada.sps.R
+import com.ravinada.sps.domain.local.FavoriteTvShowsEntity
 import com.ravinada.sps.presentation.composables.CustomEmptyStateScreen
-import com.ravinada.sps.presentation.composables.VerticalMovieItem
+import com.ravinada.sps.presentation.composables.VerticalTvShowItem
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FavoritesScreen(
     onClickNavigateToDetails: (Int) -> Unit,
-    favoriteMovies: List<FavoriteTvShowsEntity>,
+    favoriteTvShows: List<FavoriteTvShowsEntity>,
 ) {
     when {
-        favoriteMovies.isEmpty() -> {
+        favoriteTvShows.isEmpty() -> {
             CustomEmptyStateScreen(
                 modifier = Modifier.padding(bottom = 180.dp),
                 image = R.drawable.background_box_empty_state,
@@ -42,15 +42,15 @@ fun FavoritesScreen(
                 verticalItemSpacing = 0.dp,
                 horizontalArrangement = Arrangement.Center,
                 content = {
-                    items(favoriteMovies) {
-                        VerticalMovieItem(
+                    items(favoriteTvShows) {
+                        VerticalTvShowItem(
                             title = it.title,
                             release = it.overview,
                             imageUrl = it.poster_path,
                             onClick = { onClickNavigateToDetails(it.id) }
                         )
 
-                        if (it == favoriteMovies.last()) {
+                        if (it == favoriteTvShows.last()) {
                             Spacer(modifier = Modifier.height(80.dp))
                         }
 
@@ -67,7 +67,7 @@ fun FavoritesScreen(
 fun PreviewFavoritesScreen() {
     FavoritesScreen(
         onClickNavigateToDetails = {},
-        favoriteMovies = listOf(
+        favoriteTvShows = listOf(
             FavoriteTvShowsEntity(
                 id = 1,
                 title = "Title",

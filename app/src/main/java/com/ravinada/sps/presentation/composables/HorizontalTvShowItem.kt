@@ -19,13 +19,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.ravinada.sps.ui.theme.Green40
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize
+import com.ravinada.sps.ui.theme.Green40
 
 @Composable
-fun HorizontalMovieItem(
+fun HorizontalTvShowItem(
     title: String,
     description: String,
     imageUrl: String,
@@ -105,8 +105,8 @@ fun HorizontalMovieItem(
 
 @Preview
 @Composable
-fun HorizontalMovieItemPrev() {
-    HorizontalMovieItem(
+fun HorizontalTvShowItemPrev() {
+    HorizontalTvShowItem(
         title = "Fast & Furious X",
         description = "During numerous impossible missions, Dom Toretto and his family have been able to outsmart, outsmart, and outrun any enemy they encounter. But now they will have to face the deadliest opponent. that they have ever known: a terrible danger rising from the past, driven by a bloody thirst for vengeance, and ready to tear the family apart and forever destroy everything Dom cares about.",
         imageUrl = "https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",
