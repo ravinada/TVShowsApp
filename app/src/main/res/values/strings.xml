@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TvShowsApp</string>
+    <string name="app_name">TvShows</string>
     <string name="empty_screen_title_not_found_results">No results found</string>
     <string name="empty_screen_description_no_results">No results found for: %1$s</string>
     <string name="empty_screen_title_no_internet">No internet connection</string>

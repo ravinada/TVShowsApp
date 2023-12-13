@@ -22,6 +22,6 @@ object AppDatabaseModule {
     fun provideAppDatabase(@ApplicationContext appContext: Context) = Room.databaseBuilder(
         appContext,
         AppDatabase::class.java,
-        "TvShowsApp"
+        "TvShows"
     ).fallbackToDestructiveMigration().build()
 }
