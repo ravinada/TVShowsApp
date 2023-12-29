@@ -1,40 +1,41 @@
 package com.ravinada.sps.domain
 
+import com.google.gson.annotations.SerializedName
 import com.ravinada.sps.BuildConfig
 
 data class TvShowsDetailResponse(
-    val adult: Boolean? = null,
-    val backdrop_path: String? = null,
-    val created_by: List<CreatedBy>? = null,
-    val episode_run_time: List<Any>? = null,
-    val first_air_date: String? = null,
+    @SerializedName("adult") val adult: Boolean? = null,
+    @SerializedName("backdrop_path") val backdropPath: String? = null,
+    val createdBy: List<CreatedBy>? = null,
+    @SerializedName("episode_run_time") val episodeRunTime: List<Any>? = null,
+    @SerializedName("first_air_date") val firstAirDate: String? = null,
     val genres: List<Genre>? = null,
     val homepage: String? = null,
     val id: Int? = null,
-    val in_production: Boolean? = null,
+    @SerializedName("in_production") val inProduction: Boolean? = null,
     val languages: List<String>? = null,
-    val last_air_date: String? = null,
-    val last_episode_to_air: LastEpisodeToAir? = null,
+    @SerializedName("last_air_date") val lastAirDate: String? = null,
+    @SerializedName("last_episode_to_air") val lastEpisodeToAir: LastEpisodeToAir? = null,
     val name: String? = null,
     val networks: List<Network>? = null,
-    val next_episode_to_air: Any? = null,
-    val number_of_episodes: Int? = null,
-    val number_of_seasons: Int? = null,
-    val origin_country: List<String>? = null,
-    val original_language: String? = null,
-    val original_name: String? = null,
+    @SerializedName("next_episode_to_air") val nextEpisodeToAir: Any? = null,
+    @SerializedName("number_of_episodes") val numberOfEpisodes: Int? = null,
+    @SerializedName("number_of_seasons") val numberOfSeasons: Int? = null,
+    @SerializedName("origin_country") val originCountry: List<String>? = null,
+    @SerializedName("original_language") val originalLanguage: String? = null,
+    @SerializedName("original_name") val originalName: String? = null,
     val overview: String? = null,
     val popularity: Double? = null,
-    val poster_path: String? = null,
-    val production_companies: List<ProductionCompany>? = null,
-    val production_countries: List<ProductionCountry>? = null,
+    @SerializedName("poster_path") val posterPath: String? = null,
+    @SerializedName("production_companies") val productionCompanies: List<ProductionCompany>? = null,
+    @SerializedName("production_countries") val productionCountries: List<ProductionCountry>? = null,
     val seasons: List<Season>? = null,
-    val spoken_languages: List<SpokenLanguage>? = null,
+    @SerializedName("spoken_languages") val spokenLanguages: List<SpokenLanguage>? = null,
     val status: String? = null,
     val tagline: String? = null,
     val type: String? = null,
-    val vote_average: Double? = null,
-    val vote_count: Int? = null
+    @SerializedName("vote_average") val voteAverage: Double? = null,
+    @SerializedName("vote_count") val voteCount: Int? = null
 )
 
 data class Genre(
@@ -44,34 +45,32 @@ data class Genre(
 
 data class ProductionCompany(
     val id: Int,
-    val logo_path: String,
+    @SerializedName("logo_path") val logoPath: String,
     val name: String,
-    val origin_country: String
+    @SerializedName("origin_country") val originCountry: String
 )
 
 data class ProductionCountry(
-    val iso_3166_1: String,
+    @SerializedName("iso_3166_1") val iso31661: String,
     val name: String
 )
 
 data class SpokenLanguage(
-    val english_name: String,
-    val iso_639_1: String,
+    @SerializedName("english_name") val englishName: String,
+    @SerializedName("iso_639_1") val iso6391: String,
     val name: String
 )
 
-//Domain
-
 data class TvShowsDetailDomain(
     val id: Int? = null,
-    val original_name: String? = null,
+    @SerializedName("original_name") val originalName: String? = null,
     val overview: String? = null,
-    val first_air_date: String? = null,
-    val poster_path: String? = null,
-    val number_of_seasons: String? = null,
+    @SerializedName("first_air_date") val firstAirDate: String? = null,
+    @SerializedName("poster_path") val posterPath: String? = null,
+    @SerializedName("number_of_seasons") val numberOfSeasons: String? = null,
     val genres: List<GenreDomain>? = null,
-    val backdrop_path: String? = null,
-    val vote_average: Double? = null,
+    @SerializedName("backdrop_path") val backdropPath: String? = null,
+    @SerializedName("vote_average") val voteAverage: Double? = null,
 )
 
 data class GenreDomain(
@@ -80,58 +79,60 @@ data class GenreDomain(
 )
 
 data class CreatedBy(
-    val credit_id: String,
+    @SerializedName("credit_id") val creditId: String,
     val gender: Int,
     val id: Int,
     val name: String,
-    val profile_path: String
+    @SerializedName("profile_path") val profilePath: String
 )
 
 data class LastEpisodeToAir(
-    val air_date: String,
-    val episode_number: Int,
-    val episode_type: String,
+    @SerializedName("air_date") val airDate: String,
+    @SerializedName("episode_number") val episodeNumber: Int,
+    @SerializedName("episode_type") val episodeType: String,
     val id: Int,
     val name: String,
     val overview: String,
-    val production_code: String,
+    @SerializedName("production_code") val productionCode: String,
     val runtime: Int,
-    val season_number: Int,
-    val show_id: Int,
-    val still_path: String,
-    val vote_average: Double,
-    val vote_count: Int
+    @SerializedName("season_number") val seasonNumber: Int,
+    @SerializedName("show_id") val showId: Int,
+    @SerializedName("still_path") val stillPath: String,
+    @SerializedName("vote_average") val voteAverage: Double,
+    @SerializedName("vote_count") val voteCount: Int
 )
 
 data class Network(
     val id: Int,
-    val logo_path: String,
+    @SerializedName("logo_path")
+
+    val logoPath: String,
     val name: String,
-    val origin_country: String
+    @SerializedName("origin_country") val originCountry: String
 )
 
 data class Season(
-    val air_date: String,
-    val episode_count: Int,
+    @SerializedName("air_date") val airDate: String,
+    @SerializedName("episode_count") val episodeCount: Int,
     val id: Int,
     val name: String,
     val overview: String,
-    val poster_path: String,
-    val season_number: Int,
-    val vote_average: Double
+    @SerializedName("poster_path") val posterPath: String,
+    @SerializedName("season_number") val seasonNumber: Int,
+    @SerializedName("vote_average") val voteAverage: Double
 )
 
 fun TvShowsDetailResponse.toDomainModel(): TvShowsDetailDomain {
     return TvShowsDetailDomain(
         id = this.id,
         genres = this.genres?.toDomainGenre(),
-        original_name = this.original_name,
+        originalName = this.originalName,
         overview = this.overview,
-        poster_path = BuildConfig.IMAGE_URL + this.poster_path,
-        number_of_seasons = "${this.number_of_seasons.toString()} seasons",
-        first_air_date = this.first_air_date,
-        vote_average = this.vote_average,
-        backdrop_path = BuildConfig.IMAGE_URL + this.backdrop_path
+        posterPath = BuildConfig.IMAGE_URL + this.posterPath,
+        numberOfSeasons = "${this.numberOfSeasons.toString()} seasons",
+        firstAirDate = this.firstAirDate,
+        voteAverage = this.voteAverage,
+        backdropPath = BuildConfig.IMAGE_URL + this.backdropPath
     )
 }
 

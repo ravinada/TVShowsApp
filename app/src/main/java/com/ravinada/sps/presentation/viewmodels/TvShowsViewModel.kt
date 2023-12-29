@@ -2,7 +2,6 @@ package com.ravinada.sps.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ravinada.sps.BuildConfig
 import com.ravinada.sps.domain.NoConnectivityException
 import com.ravinada.sps.domain.usecases.GetTrendingTvShowsUseCase
 import com.ravinada.sps.domain.usecases.PopularTvShowsResult
@@ -38,26 +37,24 @@ class TvShowsViewModel @Inject constructor(
     }
 
     private fun getTrendingTvShows() = viewModelScope.launch(Dispatchers.IO) {
-        getTrendingTvShowsUseCase.invoke(
-            api_key = BuildConfig.API_KEY,
-            language = "en-US",
-        ).onStart {
-            _tvShowsStateResult.value = PopularTvShowsResult.Loading(true)
-        }.onEach {
-            _tvShowsStateResult.value = PopularTvShowsResult.Success(it)
-        }.catch {
-            when (it) {
-                //TODO: Add more cases Internet connection, etc
-                is NoConnectivityException -> {
-                    _tvShowsStateResult.value = PopularTvShowsResult.InternetError
-                }
+        getTrendingTvShowsUseCase.invoke()
+            .onStart {
+                _tvShowsStateResult.value = PopularTvShowsResult.Loading(true)
+            }.onEach {
+                _tvShowsStateResult.value = PopularTvShowsResult.Success(it)
+            }.catch {
+                when (it) {
+                    //TODO: Add more cases Internet connection, etc
+                    is NoConnectivityException -> {
+                        _tvShowsStateResult.value = PopularTvShowsResult.InternetError
+                    }
 
-                else -> {
-                    _tvShowsStateResult.value =
-                        PopularTvShowsResult.ErrorGeneral(it.message ?: "Error general")
+                    else -> {
+                        _tvShowsStateResult.value =
+                            PopularTvShowsResult.ErrorGeneral(it.message ?: "Error general")
+                    }
                 }
-            }
-        }.launchIn(viewModelScope)
+            }.launchIn(viewModelScope)
     }
 
     fun searchTvShowOrEmpty(query: String) {
@@ -70,22 +67,18 @@ class TvShowsViewModel @Inject constructor(
     }
 
     private fun searchTvShow(query: String) = viewModelScope.launch(Dispatchers.IO) {
-        searchTvShowUseCase.invoke(
-            api_key = BuildConfig.API_KEY,
-            language = "en-US",
-            query = query,
-            //page = 1
-        ).onStart {
-            _tvShowsStateResult.value = PopularTvShowsResult.Loading(true)
-        }.onEach {
-            if (it.isEmpty()) {
-                _tvShowsStateResult.value = PopularTvShowsResult.Empty
-                return@onEach
-            }
-            _tvShowsStateResult.value = PopularTvShowsResult.Success(it)
-        }.catch {
-            _tvShowsStateResult.value =
-                PopularTvShowsResult.ErrorGeneral(it.message ?: "Error general")
-        }.launchIn(viewModelScope)
+        searchTvShowUseCase.invoke(query = query)
+            .onStart {
+                _tvShowsStateResult.value = PopularTvShowsResult.Loading(true)
+            }.onEach {
+                if (it.isEmpty()) {
+                    _tvShowsStateResult.value = PopularTvShowsResult.Empty
+                    return@onEach
+                }
+                _tvShowsStateResult.value = PopularTvShowsResult.Success(it)
+            }.catch {
+                _tvShowsStateResult.value =
+                    PopularTvShowsResult.ErrorGeneral(it.message ?: "Error general")
+            }.launchIn(viewModelScope)
     }
 }

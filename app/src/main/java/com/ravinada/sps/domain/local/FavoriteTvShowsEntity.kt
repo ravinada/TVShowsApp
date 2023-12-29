@@ -3,7 +3,6 @@ package com.ravinada.sps.domain.local
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
 @Entity(tableName = "favorite_tvShows")
 data class FavoriteTvShowsEntity(
     @PrimaryKey val id: Int,

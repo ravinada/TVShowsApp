@@ -10,10 +10,8 @@ class GetDetailsTvShowsUseCase @Inject constructor(
     private val iTvShowsRepository: ITvShowsRepository
 ) {
     suspend operator fun invoke(
-        api_key: String,
-        language: String,
         id: String
-    ) = iTvShowsRepository.getTvShowDetail(api_key, language, id).map {
+    ) = iTvShowsRepository.getTvShowDetail(id).map {
         it.toDomainModel()
     }
 }

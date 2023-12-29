@@ -3,7 +3,6 @@ package com.ravinada.sps.presentation.viewmodels
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ravinada.sps.BuildConfig
 import com.ravinada.sps.domain.TvShowsDetailDomain
 import com.ravinada.sps.domain.local.toFavoriteTvShowsEntity
 import com.ravinada.sps.domain.usecases.DeleteFavoriteTvShowUseCase
@@ -60,8 +59,6 @@ class DetailsTvShowViewModel @Inject constructor(
 
     private fun getDetailsTvShow(id: String) = viewModelScope.launch(Dispatchers.IO) {
         getDetailsTvShowsUseCase.invoke(
-            api_key = BuildConfig.API_KEY,
-            language = "en-US",
             id = id
         ).onStart {
             _detailsTvShows.value = GetDetailsTvShowsResult.Loading(true)

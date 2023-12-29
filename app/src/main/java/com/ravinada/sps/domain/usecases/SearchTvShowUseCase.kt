@@ -8,11 +8,7 @@ import javax.inject.Inject
 class SearchTvShowUseCase @Inject constructor(
     private val repository: ITvShowsRepository
 ) {
-    suspend operator fun invoke(
-        query: String,
-        api_key: String,
-        language: String
-    ) = repository.searchTvShow(query, api_key, language).map {
+    suspend operator fun invoke(query: String) = repository.searchTvShow(query).map {
         it.results.toDomainModel()
     }
 }

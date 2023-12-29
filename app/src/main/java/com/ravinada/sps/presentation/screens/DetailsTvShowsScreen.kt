@@ -11,10 +11,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.ravinada.sps.domain.TvShowsDetailDomain
+import com.ravinada.sps.domain.usecases.GetDetailsTvShowsResult
 import com.ravinada.sps.presentation.composables.CustomErrorScreenSomethingHappens
 import com.ravinada.sps.presentation.composables.CustomNoInternetConnectionScreen
 import com.ravinada.sps.presentation.composables.LoadingScreen
-import com.ravinada.sps.domain.usecases.GetDetailsTvShowsResult
 
 @Composable
 fun DetailsTvShowScreen(
@@ -83,14 +83,14 @@ fun DetailsTvShowScreen(
                         navController.popBackStack()
                     },
                     onClickFavorite = { onClickFavorite(item) },
-                    title = item.original_name ?: "",
+                    title = item.originalName ?: "",
                     description = item.overview ?: "",
-                    imageBackdrop = item.backdrop_path ?: "",
-                    imagePoster = item.poster_path ?: "",
+                    imageBackdrop = item.backdropPath ?: "",
+                    imagePoster = item.posterPath ?: "",
                     genres = item.genres ?: listOf(),
-                    releaseDate = item.first_air_date ?: "",
-                    voteAverage = item.vote_average?.toString() ?: "",
-                    runtime = item.number_of_seasons ?: "",
+                    releaseDate = item.firstAirDate ?: "",
+                    voteAverage = item.voteAverage?.toString() ?: "",
+                    runtime = item.numberOfSeasons ?: "",
                     isFavoriteTvShow = isFavoriteTvShow
                 )
             }

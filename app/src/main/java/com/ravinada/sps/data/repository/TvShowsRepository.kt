@@ -9,22 +9,11 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface ITvShowsRepository {
-    suspend fun getTrendingTvShows(
-        apiKey: String,
-        language: String
-    ): Flow<TrendingTvShowsResponse>
+    suspend fun getTrendingTvShows(): Flow<TrendingTvShowsResponse>
 
-    suspend fun getTvShowDetail(
-        apiKey: String,
-        language: String,
-        id: String
-    ): Flow<TvShowsDetailResponse>
+    suspend fun getTvShowDetail(id: String): Flow<TvShowsDetailResponse>
 
-    suspend fun searchTvShow(
-        query: String,
-        apiKey: String,
-        language: String,
-    ): Flow<TrendingTvShowsResponse>
+    suspend fun searchTvShow(query: String): Flow<TrendingTvShowsResponse>
 
     fun getFavoriteTvShows(): Flow<List<FavoriteTvShowsEntity>>
     fun getFavoriteTvShowById(id: Int): Flow<FavoriteTvShowsEntity>
@@ -37,23 +26,12 @@ class TvShowsRepository @Inject constructor(
     private val local: IFavoriteTvShowsLocalDataSource
 ) : ITvShowsRepository {
 
-    override suspend fun getTrendingTvShows(
-        apiKey: String,
-        language: String
-    ) = remote.getTrendingTvShows(apiKey, language)
+    override suspend fun getTrendingTvShows() = remote.getTrendingTvShows()
 
-    override suspend fun getTvShowDetail(
-        apiKey: String,
-        language: String,
-        id: String
-    ) = remote.getTvShowDetail(apiKey, language, id)
+    override suspend fun getTvShowDetail(id: String) = remote.getTvShowDetail(id)
 
-    override suspend fun searchTvShow(
-        query: String,
-        apiKey: String,
-        language: String
-    ): Flow<TrendingTvShowsResponse> {
-        return remote.searchTvShow(query, apiKey, language)
+    override suspend fun searchTvShow(query: String): Flow<TrendingTvShowsResponse> {
+        return remote.searchTvShow(query)
     }
 
     override fun getFavoriteTvShows(): Flow<List<FavoriteTvShowsEntity>> {

@@ -18,7 +18,6 @@ interface FavoriteTvShowsEntityDao {
     @Query("DELETE FROM favorite_tvShows WHERE id = :id")
     suspend fun deleteById(id: Int)
 
-    //add
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(favoriteTvShowsEntity: FavoriteTvShowsEntity)
 }

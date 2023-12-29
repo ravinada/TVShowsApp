@@ -28,12 +28,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ravinada.sps.R
 import com.ravinada.sps.domain.TvShowsDomain
+import com.ravinada.sps.domain.usecases.PopularTvShowsResult
 import com.ravinada.sps.presentation.composables.CustomEmptySearchScreen
 import com.ravinada.sps.presentation.composables.CustomErrorScreenSomethingHappens
 import com.ravinada.sps.presentation.composables.CustomNoInternetConnectionScreen
 import com.ravinada.sps.presentation.composables.HorizontalTvShowItem
 import com.ravinada.sps.presentation.composables.LoadingScreen
-import com.ravinada.sps.domain.usecases.PopularTvShowsResult
 import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -162,9 +162,9 @@ fun HeaderTvShowsScreen(
                         HorizontalTvShowItem(
                             title = it.title,
                             description = it.overview,
-                            imageUrl = it.poster_path,
-                            rating = it.vote_average,
-                            releaseDate = it.release_date ?: "",
+                            imageUrl = it.posterPath,
+                            rating = it.voteAverage,
+                            releaseDate = it.releaseDate ?: "",
                             onClick = { onClickNavigateToDetails(it.id) })
 
                         if (it == tvShowsDomainList.last()) {
@@ -184,17 +184,17 @@ fun TvShowsScreenPrev() {
             id = 1,
             title = "Doctor Who",
             overview = "The Doctor is a Time Lord: a 900 year old alien with 2 hearts, part of a gifted civilization who mastered time travel. The Doctor saves planets for a living—more of a hobby actually, and the Doctor's very, very good at it.",
-            poster_path = "https://image.tmdb.org/t/p/original/4edFyasCrkH4MKs6H4mHqlrxA6b.jpg",
-            vote_average = 7.9f,
-            release_date = "2022-02-17"
+            posterPath = "https://image.tmdb.org/t/p/original/4edFyasCrkH4MKs6H4mHqlrxA6b.jpg",
+            voteAverage = 7.9f,
+            releaseDate = "2022-02-17"
         ),
         TvShowsDomain(
             id = 2,
             title = "Los Farad",
             overview = "The day Oskar, a typical local boy, crosses paths with the mysterious and wealthy Farad family, his life changes forever. Oskar enters a winner-take-all game, the world of international arms trafficking. In Marbella where the Farads live, luxury, adrenaline and intense emotions await him... But also a backside of violence and cynicism that tests his will.",
-            poster_path = "https://image.tmdb.org/t/p/original/t2aNPWte1XmVbFL2HMppoQK3PG.jpg",
-            vote_average = 6.8f,
-            release_date = "2023-12-12"
+            posterPath = "https://image.tmdb.org/t/p/original/t2aNPWte1XmVbFL2HMppoQK3PG.jpg",
+            voteAverage = 6.8f,
+            releaseDate = "2023-12-12"
         ),
     )
 

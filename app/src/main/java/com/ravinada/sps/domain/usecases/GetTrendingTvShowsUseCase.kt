@@ -9,10 +9,7 @@ import javax.inject.Inject
 class GetTrendingTvShowsUseCase @Inject constructor(
     private val iTvShowsRepository: ITvShowsRepository
 ) {
-    suspend operator fun invoke(
-        api_key: String,
-        language: String,
-    ) = iTvShowsRepository.getTrendingTvShows(api_key, language).map {
+    suspend operator fun invoke() = iTvShowsRepository.getTrendingTvShows().map {
         it.results.toDomainModel()
     }
 }

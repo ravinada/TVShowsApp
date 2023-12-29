@@ -21,8 +21,8 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.ravinada.sps.presentation.navigation.HomeScreen
 import com.ravinada.sps.presentation.navigation.HomeNavGraph
+import com.ravinada.sps.presentation.navigation.HomeScreen
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
