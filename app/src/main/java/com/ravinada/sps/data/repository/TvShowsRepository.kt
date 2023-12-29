@@ -15,9 +15,14 @@ interface ITvShowsRepository {
 
     suspend fun searchTvShow(query: String): Flow<TrendingTvShowsResponse>
 
+    suspend fun getSimilarTvShows(id: String): Flow<TrendingTvShowsResponse>
+
     fun getFavoriteTvShows(): Flow<List<FavoriteTvShowsEntity>>
+
     fun getFavoriteTvShowById(id: Int): Flow<FavoriteTvShowsEntity>
+
     suspend fun insertFavoriteTvShow(favoriteTvShowsEntity: FavoriteTvShowsEntity)
+
     suspend fun deleteFavoriteTvShow(id: Int)
 }
 
@@ -33,6 +38,8 @@ class TvShowsRepository @Inject constructor(
     override suspend fun searchTvShow(query: String): Flow<TrendingTvShowsResponse> {
         return remote.searchTvShow(query)
     }
+
+    override suspend fun getSimilarTvShows(id: String) = remote.getSimilarTvShows(id)
 
     override fun getFavoriteTvShows(): Flow<List<FavoriteTvShowsEntity>> {
         return local.getFavoriteTvShows()

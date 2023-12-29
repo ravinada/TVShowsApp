@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -34,6 +36,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.ravinada.sps.R
 import com.ravinada.sps.domain.GenreDomain
+import com.ravinada.sps.domain.TvShowsDomain
+import com.ravinada.sps.presentation.composables.SimilarTvShowItem
 import com.ravinada.sps.ui.theme.Green40
 
 @Composable
@@ -49,9 +53,9 @@ fun DetailsTvShowContent(
     voteAverage: String,
     runtime: String,
     isFavoriteTvShow: Boolean,
+    similarTvShowsList: List<TvShowsDomain>
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
-
         Spacer(modifier = Modifier.height(16.dp))
         Row(
             modifier = Modifier
@@ -233,6 +237,30 @@ fun DetailsTvShowContent(
             fontWeight = FontWeight(600),
         )
 
+        Spacer(modifier = Modifier.height(24.dp))
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp),
+            text = "Similar shows",
+            fontSize = 20.sp,
+            fontFamily = FontFamily(Font(R.font.googlesans_regular, FontWeight.Normal)),
+            fontWeight = FontWeight(600),
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        LazyRow(
+            modifier = Modifier.fillMaxSize(),
+            horizontalArrangement = Arrangement.Start,
+            content = {
+                items(similarTvShowsList) {
+                    SimilarTvShowItem(
+                        imageUrl = it.posterPath,
+                    )
+                }
+            }
+        )
     }
 }
 
@@ -328,6 +356,24 @@ fun HorizontalThreeOptions(
 @Preview
 @Composable
 fun DetailsTvShowContentPrev() {
+    val tests = listOf(
+        TvShowsDomain(
+            id = 1,
+            title = "Doctor Who",
+            overview = "The Doctor is a Time Lord: a 900 year old alien with 2 hearts, part of a gifted civilization who mastered time travel. The Doctor saves planets for a living—more of a hobby actually, and the Doctor's very, very good at it.",
+            posterPath = "https://image.tmdb.org/t/p/original/4edFyasCrkH4MKs6H4mHqlrxA6b.jpg",
+            voteAverage = 7.9f,
+            releaseDate = "2022-02-17"
+        ),
+        TvShowsDomain(
+            id = 2,
+            title = "Los Farad",
+            overview = "The day Oskar, a typical local boy, crosses paths with the mysterious and wealthy Farad family, his life changes forever. Oskar enters a winner-take-all game, the world of international arms trafficking. In Marbella where the Farads live, luxury, adrenaline and intense emotions await him... But also a backside of violence and cynicism that tests his will.",
+            posterPath = "https://image.tmdb.org/t/p/original/t2aNPWte1XmVbFL2HMppoQK3PG.jpg",
+            voteAverage = 6.8f,
+            releaseDate = "2023-12-12"
+        ),
+    )
     DetailsTvShowContent(
         title = "Doctor Who",
         description = "The Doctor is a Time Lord: a 900 year old alien with 2 hearts, part of a gifted civilization who mastered time travel. The Doctor saves planets for a living—more of a hobby actually, and the Doctor's very, very good at it.",
@@ -339,6 +385,7 @@ fun DetailsTvShowContentPrev() {
         runtime = "7 season",
         onClickBack = {},
         onClickFavorite = {},
-        isFavoriteTvShow = false
+        isFavoriteTvShow = false,
+        similarTvShowsList = tests
     )
 }

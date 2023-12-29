@@ -81,6 +81,7 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
             val detailsTvShowViewModel = hiltViewModel<DetailsTvShowViewModel>()
             val stateTvShowDetail by detailsTvShowViewModel.detailsTvShow.collectAsStateWithLifecycle()
             val isFavoriteTvShow by detailsTvShowViewModel.isFavoriteTvShow.collectAsStateWithLifecycle()
+            val similarTvShows by detailsTvShowViewModel.similarTvShows.collectAsStateWithLifecycle()
 
             DetailsTvShowScreen(
                 navController = navController,
@@ -89,6 +90,7 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
                     detailsTvShowViewModel.saveOrRemoveFavoriteTvShow(tvShowDetail)
                 },
                 isFavoriteTvShow = isFavoriteTvShow,
+                similarTvShowsResult = similarTvShows
             )
         }
     }

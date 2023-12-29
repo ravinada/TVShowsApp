@@ -12,6 +12,8 @@ interface ITvShowsRemoteDataSource {
     suspend fun getTvShowDetail(id: String): Flow<TvShowsDetailResponse>
 
     suspend fun searchTvShow(query: String): Flow<TrendingTvShowsResponse>
+
+    suspend fun getSimilarTvShows(id: String): Flow<TrendingTvShowsResponse>
 }
 
 class TvShowsRemoteDataSource @Inject constructor(
@@ -28,5 +30,9 @@ class TvShowsRemoteDataSource @Inject constructor(
 
     override suspend fun searchTvShow(query: String) = performNetworkFlow {
         iTvShowsService.searchTvShow(query)
+    }
+
+    override suspend fun getSimilarTvShows(id: String) = performNetworkFlow {
+        iTvShowsService.getSimilarTvShows(id)
     }
 }

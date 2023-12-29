@@ -9,7 +9,9 @@ import com.ravinada.sps.domain.usecases.DeleteFavoriteTvShowUseCase
 import com.ravinada.sps.domain.usecases.GetDetailsTvShowsResult
 import com.ravinada.sps.domain.usecases.GetDetailsTvShowsUseCase
 import com.ravinada.sps.domain.usecases.GetFavoriteTvShowByIdUseCase
+import com.ravinada.sps.domain.usecases.GetSimilarTvShowsUseCase
 import com.ravinada.sps.domain.usecases.InsertFavoriteTvShowUseCase
+import com.ravinada.sps.domain.usecases.SimilarTvShowsResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -29,7 +31,8 @@ class DetailsTvShowViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val insertFavoriteTvShowUseCase: InsertFavoriteTvShowUseCase,
     private val getFavoriteTvShowUseCase: GetFavoriteTvShowByIdUseCase,
-    private val deleteFavoriteTvShowUseCase: DeleteFavoriteTvShowUseCase
+    private val deleteFavoriteTvShowUseCase: DeleteFavoriteTvShowUseCase,
+    private val getSimilarTvShowsUseCase: GetSimilarTvShowsUseCase
 ) : ViewModel() {
 
     private val _detailsTvShows =
@@ -47,6 +50,14 @@ class DetailsTvShowViewModel @Inject constructor(
         initialValue = false
     )
 
+    private val _similarTvShows =
+        MutableStateFlow<SimilarTvShowsResult>(SimilarTvShowsResult.Loading(false))
+    val similarTvShows = _similarTvShows.stateIn(
+        scope = viewModelScope,
+        started = kotlinx.coroutines.flow.SharingStarted.WhileSubscribed(5000, 1),
+        initialValue = SimilarTvShowsResult.Loading(false)
+    )
+
     init {
         val idTvShow = savedStateHandle.get<String>("tvShowId") ?: ""
         start(idTvShow)
@@ -54,7 +65,8 @@ class DetailsTvShowViewModel @Inject constructor(
 
     private fun start(idTvShow: String) = viewModelScope.launch {
         getDetailsTvShow(idTvShow).join()
-        getFavoriteTvShowById(idTvShow)
+        getFavoriteTvShowById(idTvShow).join()
+        getSimilarTvShows(idTvShow)
     }
 
     private fun getDetailsTvShow(id: String) = viewModelScope.launch(Dispatchers.IO) {
@@ -88,7 +100,6 @@ class DetailsTvShowViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val id = (tvShowsDetailDomain.id ?: 0)
             deleteFavoriteTvShowUseCase.invoke(id)
-
         }
 
     private fun getFavoriteTvShowById(id: String) = viewModelScope.launch(Dispatchers.IO) {
@@ -98,12 +109,21 @@ class DetailsTvShowViewModel @Inject constructor(
             .onStart {
                 _isFavoriteTvShows.value = false
             }.onEach {
-                when (it) {
-                    null -> _isFavoriteTvShows.value = false
-                    else -> _isFavoriteTvShows.value = true
-                }
+                _isFavoriteTvShows.value = true
             }.catch {
                 _isFavoriteTvShows.value = false
             }.launchIn(viewModelScope)
+    }
+
+    private fun getSimilarTvShows(id: String) = viewModelScope.launch(Dispatchers.IO) {
+        getSimilarTvShowsUseCase.invoke(
+            id = id
+        ).onStart {
+            _similarTvShows.value = SimilarTvShowsResult.Loading(true)
+        }.onEach {
+            _similarTvShows.value = SimilarTvShowsResult.Success(it)
+        }.catch {
+            _similarTvShows.value = SimilarTvShowsResult.Error("Error, ${it.message}")
+        }.launchIn(viewModelScope)
     }
 }

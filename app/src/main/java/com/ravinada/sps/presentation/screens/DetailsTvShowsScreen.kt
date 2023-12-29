@@ -7,11 +7,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.ravinada.sps.domain.TvShowsDetailDomain
+import com.ravinada.sps.domain.TvShowsDomain
 import com.ravinada.sps.domain.usecases.GetDetailsTvShowsResult
+import com.ravinada.sps.domain.usecases.SimilarTvShowsResult
 import com.ravinada.sps.presentation.composables.CustomErrorScreenSomethingHappens
 import com.ravinada.sps.presentation.composables.CustomNoInternetConnectionScreen
 import com.ravinada.sps.presentation.composables.LoadingScreen
@@ -22,6 +25,7 @@ fun DetailsTvShowScreen(
     getDetailsTvShowsResult: GetDetailsTvShowsResult,
     onClickFavorite: (TvShowsDetailDomain) -> Unit,
     isFavoriteTvShow: Boolean,
+    similarTvShowsResult: SimilarTvShowsResult
 ) {
     var isLoading by remember { mutableStateOf(false) }
     var isError by remember { mutableStateOf(false) }
@@ -29,8 +33,9 @@ fun DetailsTvShowScreen(
     var isInternetError by remember { mutableStateOf(false) }
 
     var item by remember { mutableStateOf(TvShowsDetailDomain()) }
+    var similarTvShowsList by rememberSaveable { mutableStateOf(listOf<TvShowsDomain>()) }
 
-    LaunchedEffect(key1 = getDetailsTvShowsResult) {
+    LaunchedEffect(key1 = getDetailsTvShowsResult, key2 = similarTvShowsResult) {
         when (getDetailsTvShowsResult) {
             is GetDetailsTvShowsResult.Success -> {
                 isLoading = false
@@ -59,6 +64,23 @@ fun DetailsTvShowScreen(
                 isError = false
                 isInternetError = true
                 isSuccess = false
+            }
+        }
+        when (similarTvShowsResult) {
+            is SimilarTvShowsResult.Success -> {
+                isError = false
+                isSuccess = true
+                similarTvShowsList = similarTvShowsResult.list
+            }
+
+            is SimilarTvShowsResult.Error -> {
+                isLoading = false
+                isSuccess = false
+                isError = true
+            }
+
+            else -> {
+                // nothing to do
             }
         }
     }
@@ -91,7 +113,8 @@ fun DetailsTvShowScreen(
                     releaseDate = item.firstAirDate ?: "",
                     voteAverage = item.voteAverage?.toString() ?: "",
                     runtime = item.numberOfSeasons ?: "",
-                    isFavoriteTvShow = isFavoriteTvShow
+                    isFavoriteTvShow = isFavoriteTvShow,
+                    similarTvShowsList = similarTvShowsList
                 )
             }
         }
