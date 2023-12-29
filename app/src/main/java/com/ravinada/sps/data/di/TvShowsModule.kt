@@ -24,7 +24,7 @@ abstract class TvShowsModule {
     @Singleton
     @Binds
     abstract fun provideTvShowServices(
-        moviesServiceImpl: TvShowsServiceImpl
+        tvShowsServiceImpl: TvShowsServiceImpl
     ): ITvShowsService
 
     @Singleton

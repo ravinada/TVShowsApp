@@ -109,7 +109,10 @@ class DetailsTvShowViewModel @Inject constructor(
             .onStart {
                 _isFavoriteTvShows.value = false
             }.onEach {
-                _isFavoriteTvShows.value = true
+                when (it) {
+                    null -> _isFavoriteTvShows.value = false
+                    else -> _isFavoriteTvShows.value = true
+                }
             }.catch {
                 _isFavoriteTvShows.value = false
             }.launchIn(viewModelScope)

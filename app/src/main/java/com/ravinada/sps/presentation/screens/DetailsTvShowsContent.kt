@@ -251,7 +251,9 @@ fun DetailsTvShowContent(
         Spacer(modifier = Modifier.height(4.dp))
 
         LazyRow(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 24.dp, end = 12.dp),
             horizontalArrangement = Arrangement.Start,
             content = {
                 items(similarTvShowsList) {

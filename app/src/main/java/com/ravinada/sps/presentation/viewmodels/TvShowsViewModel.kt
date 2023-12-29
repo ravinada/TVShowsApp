@@ -36,7 +36,7 @@ class TvShowsViewModel @Inject constructor(
         getTrendingTvShows()
     }
 
-    private fun getTrendingTvShows() = viewModelScope.launch(Dispatchers.IO) {
+    fun getTrendingTvShows() = viewModelScope.launch(Dispatchers.IO) {
         getTrendingTvShowsUseCase.invoke()
             .onStart {
                 _tvShowsStateResult.value = PopularTvShowsResult.Loading(true)
@@ -66,7 +66,7 @@ class TvShowsViewModel @Inject constructor(
         searchTvShow(query)
     }
 
-    private fun searchTvShow(query: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun searchTvShow(query: String) = viewModelScope.launch(Dispatchers.IO) {
         searchTvShowUseCase.invoke(query = query)
             .onStart {
                 _tvShowsStateResult.value = PopularTvShowsResult.Loading(true)
