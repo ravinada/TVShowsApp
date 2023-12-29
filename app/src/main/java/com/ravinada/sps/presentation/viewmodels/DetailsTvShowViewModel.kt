@@ -6,11 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.ravinada.sps.BuildConfig
 import com.ravinada.sps.domain.TvShowsDetailDomain
 import com.ravinada.sps.domain.local.toFavoriteTvShowsEntity
-import com.ravinada.sps.usecases.DeleteFavoriteTvShowUseCase
-import com.ravinada.sps.usecases.GetDetailsTvShowsResult
-import com.ravinada.sps.usecases.GetDetailsTvShowsUseCase
-import com.ravinada.sps.usecases.GetFavoriteTvShowByIdUseCase
-import com.ravinada.sps.usecases.InsertFavoriteTvShowUseCase
+import com.ravinada.sps.domain.usecases.DeleteFavoriteTvShowUseCase
+import com.ravinada.sps.domain.usecases.GetDetailsTvShowsResult
+import com.ravinada.sps.domain.usecases.GetDetailsTvShowsUseCase
+import com.ravinada.sps.domain.usecases.GetFavoriteTvShowByIdUseCase
+import com.ravinada.sps.domain.usecases.InsertFavoriteTvShowUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

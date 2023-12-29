@@ -13,22 +13,22 @@ interface IFavoriteTvShowsLocalDataSource {
 }
 
 class FavoriteTvShowsLocalDataSourceImpl @Inject constructor(
-    private val moviesDao: FavoriteTvShowsEntityDao
+    private val tvShowsDao: FavoriteTvShowsEntityDao
 ) : IFavoriteTvShowsLocalDataSource {
     override fun getFavoriteTvShows(): Flow<List<FavoriteTvShowsEntity>> {
-        return moviesDao.getAll()
+        return tvShowsDao.getAll()
     }
 
     override fun getFavoriteTvShowById(id: Int): Flow<FavoriteTvShowsEntity> {
-        return moviesDao.getById(id)
+        return tvShowsDao.getById(id)
     }
 
     override suspend fun insertFavoriteTvShow(favoriteTvShowsEntity: FavoriteTvShowsEntity) {
-        return moviesDao.insert(favoriteTvShowsEntity)
+        return tvShowsDao.insert(favoriteTvShowsEntity)
     }
 
     override suspend fun deleteFavoriteTvShow(id: Int) {
-        return moviesDao.deleteById(id)
+        return tvShowsDao.deleteById(id)
     }
 
 }

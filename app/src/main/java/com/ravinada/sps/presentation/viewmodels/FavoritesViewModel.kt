@@ -3,7 +3,7 @@ package com.ravinada.sps.presentation.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ravinada.sps.domain.local.FavoriteTvShowsEntity
-import com.ravinada.sps.usecases.GetFavoriteTvShowsUseCase
+import com.ravinada.sps.domain.usecases.GetFavoriteTvShowsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

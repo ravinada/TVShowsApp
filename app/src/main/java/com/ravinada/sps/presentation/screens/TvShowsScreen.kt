@@ -33,7 +33,7 @@ import com.ravinada.sps.presentation.composables.CustomErrorScreenSomethingHappe
 import com.ravinada.sps.presentation.composables.CustomNoInternetConnectionScreen
 import com.ravinada.sps.presentation.composables.HorizontalTvShowItem
 import com.ravinada.sps.presentation.composables.LoadingScreen
-import com.ravinada.sps.usecases.PopularTvShowsResult
+import com.ravinada.sps.domain.usecases.PopularTvShowsResult
 import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)

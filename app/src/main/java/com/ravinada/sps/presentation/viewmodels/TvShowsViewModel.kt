@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ravinada.sps.BuildConfig
 import com.ravinada.sps.domain.NoConnectivityException
-import com.ravinada.sps.usecases.GetTrendingTvShowsUseCase
-import com.ravinada.sps.usecases.PopularTvShowsResult
-import com.ravinada.sps.usecases.SearchTvShowUseCase
+import com.ravinada.sps.domain.usecases.GetTrendingTvShowsUseCase
+import com.ravinada.sps.domain.usecases.PopularTvShowsResult
+import com.ravinada.sps.domain.usecases.SearchTvShowUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

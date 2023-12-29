@@ -14,7 +14,7 @@ import com.ravinada.sps.domain.TvShowsDetailDomain
 import com.ravinada.sps.presentation.composables.CustomErrorScreenSomethingHappens
 import com.ravinada.sps.presentation.composables.CustomNoInternetConnectionScreen
 import com.ravinada.sps.presentation.composables.LoadingScreen
-import com.ravinada.sps.usecases.GetDetailsTvShowsResult
+import com.ravinada.sps.domain.usecases.GetDetailsTvShowsResult
 
 @Composable
 fun DetailsTvShowScreen(

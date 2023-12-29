@@ -1,4 +1,4 @@
-package com.ravinada.sps.usecases
+package com.ravinada.sps.domain.usecases
 
 import com.ravinada.sps.data.repository.ITvShowsRepository
 import javax.inject.Inject
